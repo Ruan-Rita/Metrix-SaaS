@@ -1,41 +1,67 @@
-import { useState } from "react"
+import { useState, InputHTMLAttributes } from "react"
+import { EnvelopeIcon, LockClosedIcon, UserIcon } from '@heroicons/react/20/solid'
 
-interface IInput {
-  label: string
-  value: string
+interface IInput extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string
+  type?: string
+  value?: string
 }
-export default function Input({label, value}: IInput) {
+export default function Input({label, value, type = 'text', ...rest}: IInput) {
   const [newValue, setNewValue] = useState(value)
+  
+  function getProps(classNameOwner?: string)
+  {
+    let className = "relative block w-full appearance-none rounded-md border border-gray-100 px-3 py-2 text-gray-700 placeholder-gray-500 focus:z-10 focus:border-gray-300 focus:outline-none focus:ring-indigo-500 sm:text-sm bg-gray-100 "
+    rest.className = `${className} ${rest.className } ${classNameOwner}`
+    return {
+      type,
+      value,
+      ...rest
+    }
+  }
+
+  function getIcon ()
+  {
+    const styles = {
+      className: "w-4 absolute ml-2 z-20 text-neutral-700"
+    }
+    const typeIcons = {
+      'email' : <EnvelopeIcon {... styles}/>,
+      'name' : <UserIcon {... styles}/>,
+      'password' : <LockClosedIcon {... styles}/>
+    }
+    return typeIcons[type] ?? false
+  }
+
+  function getComponent()
+  {
+    const hasIcon = getIcon()
+    return (
+      <div className="relative flex left-0 items-center mb-6">
+        {hasIcon}
+        <input
+          {... getProps(hasIcon && 'pl-7' )}
+          onChange={e => setNewValue(e.target.value)}
+          value={newValue}
+        />
+      </div>
+    )
+  }
   return (
     <div>
       {
         label ? (
-          <label className="sr-only">
-            {label}
-            <input
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="Email address"
-            />
+          <label>
+            <>
+              {label}
+              {getComponent()}
+            </>
           </label>
         )
         : (
-          <input
-            id="email-address"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={newValue}
-            onChange={e => {
-              console.log('test de onchange');
-            }}
-            required
-            className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            placeholder="Email address"
-          />
+          <>
+            {getComponent()}
+          </>
         )
       }
     </div>

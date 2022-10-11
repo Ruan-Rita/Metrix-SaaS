@@ -1,6 +1,10 @@
+@import "./fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 html,
 body {
@@ -17,4 +21,7 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'Quicksand';
+  color: #444
 }
+
