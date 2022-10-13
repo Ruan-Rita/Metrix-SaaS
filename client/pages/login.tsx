@@ -4,11 +4,15 @@ import logo from '../public/images/logo.png'
 import Input from "../components/core/Input";
 import SubmitButton from "../components/core/Submit";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter()
+  
   function _send(event: FormEvent) {
     event.preventDefault()
     console.log('event', event)
+    router.push('dashboard')
   }
 
   return (
