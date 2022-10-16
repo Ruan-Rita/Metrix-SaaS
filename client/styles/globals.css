@@ -25,3 +25,12 @@ a {
   color: #444
 }
 
+.link-active-white, .link-active-white * {
+  color: white;
+}
+
+.dropdown-container {
+  transform: translate(0px, 35px) !important;
+  right: 0 !important;
+  left: auto !important;
+}
