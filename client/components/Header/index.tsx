@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/20/solid"
+import { BellAlertIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/20/solid"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Dropdown from "../core/Dropdown"
@@ -10,6 +10,7 @@ interface IHeader {
 export default function Header ({title}: IHeader) {
     const router = useRouter()
     const [historic, setHistoric] = useState([])
+    const photoProfile = null
 
     useEffect(() => {
         const current = router.asPath
@@ -23,7 +24,20 @@ export default function Header ({title}: IHeader) {
         <header className='h-max'>
             <div className="text-xl px-5 py-3 flex justify-between items-center font-bold">
                 {title}
-                <Dropdown items={['shopper', 'category', 'review']} />
+                <div className="flex items-center">
+                    <Dropdown items={['shopper', 'category', 'review']} />
+                    <BellAlertIcon className="w-5 h-5 mx-4 fill-blue-500" />
+                    <div>
+                        {
+                            photoProfile ? (
+                                <img src={photoProfile}/>
+                            ) : (
+                                <UserCircleIcon className="w-10 h-10 fill-amber-600" />
+                            )
+                        }
+                    </div> 
+                </div>
+
             </div>
             <section className="px-5 py-1 flex items-baseline border-t border-gray-200">
                 <span>
