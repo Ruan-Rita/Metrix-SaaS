@@ -1,0 +1,23 @@
+import { Charts } from "../../util/Enums"
+import dynamic from "next/dynamic";
+
+export default function ChartPie() {
+
+    const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
+    const labels = ['A', 'B', 'C', 'D', 'E']
+    const settingChart = {
+        options: {},
+        series: [44, 55, 41, 17, 15],
+    };
+
+    return (
+        <div>
+            <div className="flex justify-between px-10">
+                {labels.map(name => (<p className="px-2 py-1 rounded-md bg-slate-200">{name}</p>))}
+            </div>
+            <div className="flex justify-center mt-3">
+                <ApexCharts options={settingChart.options} series={settingChart.series} type="donut" />
+            </div>
+        </div>
+    )
+}

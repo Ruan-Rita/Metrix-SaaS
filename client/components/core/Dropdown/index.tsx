@@ -1,13 +1,17 @@
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import {useState} from 'react'
+import { useEffect, useState } from 'react'
 import SimpleHash from '../../../util/SimpleHash'
 interface IDropdown {
     items: any[],
     label?: string
 }
-export default function Dropdown({items = [], label}: IDropdown) {
+export default function Dropdown({ items = [], label }: IDropdown) {
     const [selected, setSelected] = useState(-1)
-    const idDropdown = SimpleHash(10)
+    const [idDropdown, setIdDropdown] = useState('')
+
+    useEffect(() => {
+        setIdDropdown(SimpleHash(10))
+    }, [])
 
     return (
         <div className='relative'>
