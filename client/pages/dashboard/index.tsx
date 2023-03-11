@@ -1,8 +1,8 @@
-import { ChartPieIcon, PlusIcon, ShoppingBagIcon } from "@heroicons/react/20/solid";
+import { ChartPieIcon, FolderIcon, PlusIcon, ShoppingBagIcon, UserIcon, UsersIcon } from "@heroicons/react/20/solid";
 import InfoCard from "../../components/InfoCard/InfoCard";
 import InfoChart from "../../components/Charts";
 import MainTemplate from "../../components/Templates/Main";
-import { Charts } from "../../util/Enums";
+import { Charts, ThemeColorDropDown } from "../../util/Enums";
 import Image from "next/image";
 
 export default function Home() {
@@ -42,7 +42,7 @@ export default function Home() {
               </div>
             </div>
           </InfoCard>
-          <InfoCard bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
+          <InfoCard bgIconColor="bg-blue-200" icon={<UsersIcon className="fill-blue-700 w-4 h-4" />}>
             <div className="flex justify-between">
               <div className="flex-grow">
                 <h4>Sales</h4>
@@ -55,7 +55,7 @@ export default function Home() {
             </div>
           </InfoCard>
           <div className="col-span-2">
-            <InfoCard bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
+            <InfoCard bgIconColor="bg-blue-200" icon={<ShoppingBagIcon className="fill-blue-700 w-4 h-4" />}>
               <div className="flex justify-between">
                 <div className="flex-grow">
                   <h4>All Orders</h4>
@@ -76,11 +76,11 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-4 mt-4 flex-grow pb-6">
           <div className="flex flex-col">
             <div className="grid grid-cols-2 gap-4 mb-4 h-2/5">
-              <InfoCard bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
+              <InfoCard bgIconColor="bg-blue-200" title="Marketing" dropItems={['This Week', 'This Day', 'This Year']} dropDownTheme={ThemeColorDropDown.bgWhite}>
                 <InfoChart type={Charts.Pie} />
               </InfoCard>
               <div className="flex flex-col">
-                <InfoCard className="flex-grow" bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
+                <InfoCard className="flex-grow" bgIconColor="bg-blue-200" icon={<FolderIcon className="fill-blue-700 w-4 h-4" />}>
                   Segundo card
                 </InfoCard>
                 <InfoCard className="flex-grow mt-4" bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
@@ -88,7 +88,7 @@ export default function Home() {
                 </InfoCard>
               </div>
             </div>
-            <InfoCard className="flex-grow flex" bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />} onChangeDrop={value => { console.log('POHAHAHAHAAH', value) }}>
+            <InfoCard className="flex-grow flex" bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />} onChangeDrop={(value: string | number) => { console.log('POHAHAHAHAAH', value) }}>
               <InfoChart type={Charts.Line} />
             </InfoCard>
           </div>

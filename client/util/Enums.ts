@@ -19,3 +19,8 @@ export const StatusProductColorsBg = {
     Canceled: 'text-red-200',
 }
 
+export enum ThemeColorDropDown {
+    default = 'default',
+    bgWhite = 'bgWhite'
+}
+
