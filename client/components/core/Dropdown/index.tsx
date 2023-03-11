@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react'
 import SimpleHash from '../../../util/SimpleHash'
 interface IDropdown {
     items: any[],
-    label?: string
+    label?: string,
+    onChange?: Function
 }
-export default function Dropdown({ items = [], label }: IDropdown) {
+export default function Dropdown({ items = [], label, onChange }: IDropdown) {
     const [selected, setSelected] = useState(-1)
     const [idDropdown, setIdDropdown] = useState('')
 
@@ -13,9 +14,16 @@ export default function Dropdown({ items = [], label }: IDropdown) {
         setIdDropdown(SimpleHash(10))
     }, [])
 
+    useEffect(() => {
+        console.log(onChange, "isso ai  poha");
+
+        if (selected !== -1 || onChange) return
+        onChange(1)
+    }, [selected])
+
     return (
         <div className='relative'>
-            <button data-dropdown-toggle={idDropdown} className="w-auto lg:w-28 md:w-20 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            <button data-dropdown-toggle={idDropdown} className="w-auto lg:w-28 md:w-20 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                 {label ?? selected != -1 ? items[selected] : items.length > 0 ? items[0] : ''}
                 <ChevronDownIcon className="ml-auto w-5 h-5 fill-white" />
             </button>

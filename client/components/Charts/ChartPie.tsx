@@ -16,7 +16,7 @@ export default function ChartPie() {
                 {labels.map(name => (<p className="px-2 py-1 rounded-md bg-slate-200">{name}</p>))}
             </div>
             <div className="flex justify-center mt-3">
-                <ApexCharts options={settingChart.options} series={settingChart.series} type="donut" />
+                <ApexCharts className="w-full" options={settingChart.options} series={settingChart.series} type="donut" />
             </div>
         </div>
     )

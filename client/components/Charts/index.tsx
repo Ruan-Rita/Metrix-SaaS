@@ -18,7 +18,7 @@ export default function MainChart(mainChart: IMainChart) {
     }
 
     return (
-        <div>
+        <div className="flex-grow">
             {renderChart()}
         </div>
     )

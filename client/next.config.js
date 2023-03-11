@@ -9,5 +9,13 @@ module.exports = {
         permanent: true,
       },
     ]
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'a-static.mlcdn.com.br',
+      },
+    ],
+  },
 }

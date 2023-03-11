@@ -1,8 +1,7 @@
-import { Charts } from "../../util/Enums"
-import Chart from "react-apexcharts";
+import dynamic from 'next/dynamic';
 
 export default function ChartLine() {
-
+    const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
     const settingChart = {
         options: {
             chart: {
@@ -21,12 +20,12 @@ export default function ChartLine() {
     };
 
     return (
-        <div className="flex justify-center mt-3">
-            <Chart
+        <div className="flex justify-center mt-3 h-full">
+            <ApexCharts
                 options={settingChart.options}
                 series={settingChart.series}
                 type="bar"
-                width="500"
+                className="w-full h-full"
             />
         </div>
     )
