@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { DOMElement, ReactNode } from "react"
 import { ThemeColorDropDown } from "../../util/Enums"
 import Dropdown from "../core/Dropdown"
 
@@ -7,7 +7,7 @@ interface IInfoCard {
     children: ReactNode
     bgIconColor?: string
     className?: string
-    title?: string
+    title?: String | ReactNode
     dropItems?: Array<string>
     onChangeDrop?: Function
     dropDownTheme?: ThemeColorDropDown
@@ -24,7 +24,7 @@ export default function InfoCard({ icon, bgIconColor, children, className, dropI
                             </div>
                             : null
                         }
-                        <h2 className="ml-2 font-bold text-lg">{title ?? ''}</h2>
+                        <h2 className="ml-2 font-bold text-lg">{title ? title : null}</h2>
                     </div>
                     {dropItems.length > 0 ? <Dropdown theme={dropDownTheme} items={dropItems} onChange={onChangeDrop} /> : null}
                 </div>

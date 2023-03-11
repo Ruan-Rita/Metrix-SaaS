@@ -21,6 +21,7 @@ export const StatusProductColorsBg = {
 
 export enum ThemeColorDropDown {
     default = 'default',
-    bgWhite = 'bgWhite'
+    bgWhite = 'bgWhite',
+    bgBlueGray = 'bgBlueGray'
 }
 

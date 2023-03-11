@@ -1,4 +1,4 @@
-export default function SimpleHash(length: number): string {
+export default function SimpleHash(length: number = 10): string {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
