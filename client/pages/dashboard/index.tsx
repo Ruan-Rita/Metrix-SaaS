@@ -1,4 +1,4 @@
-import { ChartPieIcon, FolderIcon, PlusIcon, ShoppingBagIcon, UserIcon, UsersIcon } from "@heroicons/react/20/solid";
+import { ChartPieIcon, FolderIcon, PlusIcon, ShoppingBagIcon, ShoppingCartIcon, UserIcon, UsersIcon } from "@heroicons/react/20/solid";
 import InfoCard from "../../components/InfoCard/InfoCard";
 import InfoChart from "../../components/Charts";
 import MainTemplate from "../../components/Templates/Main";
@@ -55,7 +55,7 @@ export default function Home() {
             </div>
           </InfoCard>
           <div className="col-span-2">
-            <InfoCard bgIconColor="bg-blue-200" icon={<ShoppingBagIcon className="fill-blue-700 w-4 h-4" />}>
+            <InfoCard bgIconColor="bg-blue-200" icon={<ShoppingBagIcon className="fill-blue-700 w-4 h-4" />} dropItems={['This Week', 'This Day', 'This Year']} dropDownTheme={ThemeColorDropDown.bgWhite}>
               <div className="flex justify-between">
                 <div className="flex-grow">
                   <h4>All Orders</h4>
@@ -83,7 +83,7 @@ export default function Home() {
                 <InfoCard className="flex-grow" bgIconColor="bg-blue-200" icon={<FolderIcon className="fill-blue-700 w-4 h-4" />}>
                   Segundo card
                 </InfoCard>
-                <InfoCard className="flex-grow mt-4" bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
+                <InfoCard className="flex-grow mt-4" bgIconColor="bg-amber-200" icon={<ShoppingCartIcon className="fill-gray-700 w-4 h-4" />}>
                   Segundo card
                 </InfoCard>
               </div>
@@ -92,7 +92,7 @@ export default function Home() {
               <InfoChart type={Charts.Line} />
             </InfoCard>
           </div>
-          <InfoCard bgIconColor="bg-blue-200" icon={<ChartPieIcon className="fill-blue-700 w-4 h-4" />}>
+          <InfoCard bgIconColor="bg-blue-200" title="Recent Orders">
             {Orders.length < 0 ?
               <div className="flex flex-col justify-center flex-wrap flex-1">
                 <div className="w-40 h-40 rounded-full border-2 border-gray-300 bg-gray-200 flex justify-center content-center mx-auto">
