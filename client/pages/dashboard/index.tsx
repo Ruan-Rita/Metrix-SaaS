@@ -122,7 +122,7 @@ export default function Home() {
                 </div>
                 <h1 className="text-center mt-8 font-bold text-black">No Orders yet?</h1>
                 <p className="text-center my-4">Add products to your store and start selling to see olders here</p>
-                <button className="mx-auto flex justify-between w-36 bg-blue-500 rounded-lg px-2 py-2 content-center text-sm text-white"><PlusIcon className="fill-white" width={20} />New Product</button>
+                <button className="mx-auto flex justify-between w-36 bg-blue-500 hover:bg-blue-700 rounded-lg px-2 py-2 content-center text-sm text-white"><PlusIcon className="fill-white" width={20} />New Product</button>
               </div> :
               <div>
                 {
