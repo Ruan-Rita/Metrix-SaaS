@@ -14,15 +14,15 @@ export default function Signup() {
         <form className="mt-8  w-full" action="#" method="POST">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md">
-            <Input className="mb-8" placeholder="Your Full Name" name="name"/>
-            <Input className="mb-8" placeholder="Your Email Address" name="email"/>
-            <Input className="mb-3" placeholder="Password" name="password" type="password"/>
+            <Input placeholder="Your Full Name" name="name" type="name" />
+            <Input placeholder="Your Email Address" name="email" type="email" />
+            <Input placeholder="Password" name="password" type="password" />
           </div>
           <h6 className="text-center text-neutral-700 text-sm my-8">
             Already have as account? <Link href="login"><a className="text-blue-500">Login</a></Link>
           </h6>
           <SubmitButton label="Register" />
-          
+
         </form>
       </div>
     </section>
