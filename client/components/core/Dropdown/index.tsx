@@ -15,6 +15,8 @@ export default function Dropdown({ items = [], label, onChange, theme }: IDropdo
 
     useEffect(() => {
         setIdDropdown(SimpleHash())
+        console.log('Label', label);
+
     }, [])
 
     useEffect(() => {
@@ -37,10 +39,16 @@ export default function Dropdown({ items = [], label, onChange, theme }: IDropdo
         },
     }
 
+    function renderValue() {
+        if (selected != -1) return items[selected]
+        if (label) return label
+        if (items.length > 0) return items[0]
+        return ''
+    }
     return (
         <div className='relative'>
             <button data-dropdown-toggle={idDropdown} className={`w-fit focus:ring-2 focus:outline-none font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ${themeColor[theme ? theme : ThemeColorDropDown.default].button}`} type="button">
-                {label ?? selected != -1 ? items[selected] : items.length > 0 ? items[0] : ''}
+                {renderValue()}
                 <ChevronDownIcon className={`ml-auto w-5 h-5 ${themeColor[theme ? theme : ThemeColorDropDown.default].icon}`} />
             </button>
             <div id={idDropdown} className="dropdown-container hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 right-0 translate-x-0">

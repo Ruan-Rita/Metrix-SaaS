@@ -1,7 +1,7 @@
 import Header from "../Header";
 import SideBar from "../SideBar/Index";
 
-export default function MainTemplate ({children, title}) {
+export default function MainTemplate({ children, title }) {
 
     return (
         <main className="flex">

@@ -7,27 +7,41 @@ import {
     ArrowRightOnRectangleIcon,
     PhoneArrowDownLeftIcon,
     GiftIcon,
-    ChevronRightIcon
+    ChevronRightIcon,
+    UsersIcon
 } from "@heroicons/react/20/solid";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Logo from '../../public/images/logo.png'
 import ActiveLink from "../core/ActiveLink";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function SideBar() {
     const router = useRouter()
     const [isExpansive, setIsExpansive] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.getItem('UserUI_isExpansive') == 'true') {
+            setIsExpansive(localStorage.getItem('UserUI_isExpansive') == 'true')
+            console.log('1 ruan - rita');
+        }
+    }, [])
 
     function _logout() {
         console.log("efetuou o logout")
         router.push('login')
     }
 
+    function handleIsExpansive() {
+        const newValue = !isExpansive
+        setIsExpansive(newValue)
+        localStorage.setItem('UserUI_isExpansive', 'true')
+    }
+
     return (
         <div className="flex-none flex flex-col px-7 py-5 h-screen shadow-md">
-            <section onClick={() => setIsExpansive(!isExpansive)} className={`mb-10 flex items-center cursor-pointer hover:scale-105 transition-all ${!isExpansive ? 'justify-center' : ''}`}>
+            <section onClick={() => handleIsExpansive()} className={`mb-10 flex items-center cursor-pointer hover:scale-105 transition-all ${!isExpansive ? 'justify-center' : ''}`}>
                 <Image src={Logo} alt="LOGO" />
                 {isExpansive ? <h5 className="text-lg font-bold ml-2">Metrix</h5> : ''}
             </section>
@@ -42,7 +56,7 @@ export default function SideBar() {
                         </ActiveLink>
                     </li>
                     <li className="mb-1">
-                        <ActiveLink href={'/customers'} icon={<ShoppingBagIcon />} label="Customers" justIcon={!isExpansive}>
+                        <ActiveLink href={'/customers'} icon={<UsersIcon />} label="Customers" justIcon={!isExpansive}>
                             <span className="bg-orange-300 w-7 h-7 text-center leading-7 ml-2 rounded-full"> 3 </span>
                         </ActiveLink>
                     </li>

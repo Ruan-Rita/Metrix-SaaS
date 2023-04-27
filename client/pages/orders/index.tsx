@@ -1,11 +1,44 @@
 import { ChartPieIcon, PlusIcon, ShoppingBagIcon, UsersIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import Dropdown from "../../components/core/Dropdown";
+import SubmitButton from "../../components/core/Submit";
+import TableBase from "../../components/core/TableBase";
 import InfoCard from "../../components/InfoCard/InfoCard";
 import MainTemplate from "../../components/Templates/Main";
 
 export default function Home() {
-  const Orders = []
+  const Orders = ['item 1', 'item 2']
 
+  const titles = ['Product name', 'Color', 'Category', 'Price'];
+  const rows = [{
+    'Product name': 'Apple MacBook Pro 17"',
+    'Color': 'Silver',
+    'Category': 'Laptop',
+    'Price': '$2999',
+  }, {
+    'Product name': 'Microsoft Surface Pro',
+    'Color': 'White',
+    'Category': 'Laptop PC',
+    'Price': '$1999	',
+  }, {
+    'Product name': 'Magic Mouse 2',
+    'Color': 'Black',
+    'Category': 'Accessories',
+    'Price': '$99',
+  }];
+
+  function renderMenuRecentOrders() {
+    return (<div className="flex gap-1">
+      <div className="flex">
+        <SubmitButton label="Search" className="rounded-none" />
+        <input type="search" />
+      </div>
+      <SubmitButton label="filter" />
+      <SubmitButton label="share" />
+      <Dropdown items={['item 1', 'item 2', 'item 3']} label={'Bulk Action'} />
+
+    </div>)
+  }
   return (
     <MainTemplate title="Orders">
       <section className="flex flex-col h-full pb-4">
@@ -54,7 +87,7 @@ export default function Home() {
             </div>
           </InfoCard>
         </div>
-        <InfoCard title="Recent Orders" className="mt-4 flex-grow">
+        <InfoCard title="Recent Orders" className="mt-4 flex-grow py-5" rightSide={renderMenuRecentOrders()}>
           {Orders.length <= 0 ?
             <div className="flex flex-col justify-center flex-wrap flex-1">
               <div className="w-40 h-40 rounded-full border-2 border-gray-300 bg-gray-200 flex justify-center content-center mx-auto">
@@ -65,7 +98,7 @@ export default function Home() {
               <button className="mx-auto flex justify-between w-36 bg-blue-500 hover:bg-blue-700 rounded-lg px-2 py-2 content-center text-sm text-white"><PlusIcon className="fill-white" width={20} />New Product</button>
             </div> :
             <div>
-
+              <TableBase titles={titles} rows={rows} />
             </div>}
         </InfoCard>
       </section>

@@ -7,12 +7,19 @@ interface IInfoCard {
     children: ReactNode
     bgIconColor?: string
     className?: string
+    rightSide?: boolean | ReactNode
     title?: String | ReactNode
     dropItems?: Array<string>
     onChangeDrop?: Function
     dropDownTheme?: ThemeColorDropDown
 }
-export default function InfoCard({ icon, bgIconColor, children, className, dropItems = [], title, onChangeDrop, dropDownTheme }: IInfoCard) {
+export default function InfoCard({ icon, bgIconColor, children, className, rightSide = false, dropItems = [], title, onChangeDrop, dropDownTheme }: IInfoCard) {
+    function renderRightSide() {
+        if (rightSide) return rightSide
+        return <>
+            {dropItems.length > 0 ? <Dropdown theme={dropDownTheme} items={dropItems} onChange={onChangeDrop} /> : null}
+        </>
+    }
     return (
         <div className={`p-3 flex bg-white rounded-2xl ${className}`} >
             <div className="flex-1 flex flex-col">
@@ -26,7 +33,7 @@ export default function InfoCard({ icon, bgIconColor, children, className, dropI
                         }
                         <h2 className="ml-2 font-bold text-lg">{title ? title : null}</h2>
                     </div>
-                    {dropItems.length > 0 ? <Dropdown theme={dropDownTheme} items={dropItems} onChange={onChangeDrop} /> : null}
+                    {renderRightSide()}
                 </div>
                 {children}
             </div>
