@@ -31,7 +31,7 @@ export default function InfoCard({ icon, bgIconColor, children, className, right
                             </div>
                             : null
                         }
-                        <h2 className="ml-2 font-bold text-lg">{title ? title : null}</h2>
+                        <h2 className="font-bold text-lg">{title ? title : null}</h2>
                     </div>
                     {renderRightSide()}
                 </div>

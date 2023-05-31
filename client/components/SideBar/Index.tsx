@@ -10,7 +10,6 @@ import {
     ChevronRightIcon,
     UsersIcon
 } from "@heroicons/react/20/solid";
-
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Logo from '../../public/images/logo.png'
@@ -19,13 +18,10 @@ import { useEffect, useState } from 'react'
 
 export default function SideBar() {
     const router = useRouter()
-    const [isExpansive, setIsExpansive] = useState(false)
+    const [isExpansive, setIsExpansive] = useState(true)
 
     useEffect(() => {
-        if (localStorage.getItem('UserUI_isExpansive') == 'true') {
-            setIsExpansive(localStorage.getItem('UserUI_isExpansive') == 'true')
-            console.log('1 ruan - rita');
-        }
+        setIsExpansive(localStorage.getItem('UserUI_isExpansive') == 'true')
     }, [])
 
     function _logout() {
@@ -36,7 +32,7 @@ export default function SideBar() {
     function handleIsExpansive() {
         const newValue = !isExpansive
         setIsExpansive(newValue)
-        localStorage.setItem('UserUI_isExpansive', 'true')
+        localStorage.setItem('UserUI_isExpansive', newValue ? 'true' : 'false')
     }
 
     return (

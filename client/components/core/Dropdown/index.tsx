@@ -9,7 +9,7 @@ interface IDropdown {
     className?: string
     theme?: ThemeColorDropDown
 }
-export default function Dropdown({ items = [], label, onChange, theme }: IDropdown) {
+export default function Dropdown({ items = [], label, onChange, theme, className }: IDropdown) {
     const [selected, setSelected] = useState(-1)
     const [idDropdown, setIdDropdown] = useState('')
 
@@ -46,8 +46,8 @@ export default function Dropdown({ items = [], label, onChange, theme }: IDropdo
         return ''
     }
     return (
-        <div className='relative'>
-            <button data-dropdown-toggle={idDropdown} className={`w-fit focus:ring-2 focus:outline-none font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ${themeColor[theme ? theme : ThemeColorDropDown.default].button}`} type="button">
+        <div className={`relative ${className}`}>
+            <button data-dropdown-toggle={idDropdown} className={`w-fit h-full focus:ring-2 focus:outline-none font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ${themeColor[theme ? theme : ThemeColorDropDown.default].button}`} type="button">
                 {renderValue()}
                 <ChevronDownIcon className={`ml-auto w-5 h-5 ${themeColor[theme ? theme : ThemeColorDropDown.default].icon}`} />
             </button>

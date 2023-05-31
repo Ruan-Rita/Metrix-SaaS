@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter()
-  
+
   function _send(event: FormEvent) {
     event.preventDefault()
     console.log('event', event)
@@ -24,8 +24,12 @@ export default function Home() {
         <form className="mt-8  w-full" action="#" onSubmit={_send}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md">
-            <Input placeholder="E-mail" name="email" type="email" required/>
-            <Input placeholder="Password" name="password" type="password" required />
+            <div className="mb-6">
+              <Input placeholder="E-mail" name="email" type="email" required />
+            </div>
+            <div className="!mb-2">
+              <Input placeholder="Password" name="password" type="password" required />
+            </div>
             <div className="text-sm text-right">
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Recover password
@@ -36,7 +40,7 @@ export default function Home() {
             Don't have an account ? <Link href="singup"><a className="text-blue-500">Sign Up</a></Link>
           </h6>
           <SubmitButton label="Login" />
-          
+
         </form>
       </div>
     </section>

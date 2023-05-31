@@ -1,10 +1,12 @@
 import { ChartPieIcon, PlusIcon, ShoppingBagIcon, UsersIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Dropdown from "../../components/core/Dropdown";
+import Input from "../../components/core/Input";
 import SubmitButton from "../../components/core/Submit";
 import TableBase from "../../components/core/TableBase";
 import InfoCard from "../../components/InfoCard/InfoCard";
 import MainTemplate from "../../components/Templates/Main";
+import { ThemeColorDropDown } from "../../util/Enums";
 
 export default function Home() {
   const Orders = ['item 1', 'item 2']
@@ -30,12 +32,11 @@ export default function Home() {
   function renderMenuRecentOrders() {
     return (<div className="flex gap-1">
       <div className="flex">
-        <SubmitButton label="Search" className="rounded-none" />
-        <input type="search" />
+        <Input type="search" placeholder="Search" className="border border-gray-300 bg-white" />
       </div>
-      <SubmitButton label="filter" />
-      <SubmitButton label="share" />
-      <Dropdown items={['item 1', 'item 2', 'item 3']} label={'Bulk Action'} />
+      <SubmitButton label="Filter" className="w-max border-solid !border-gray-400 bg-white !text-gray-900" />
+      <SubmitButton label="Share" className="w-max border-solid !border-gray-400 bg-white !text-gray-900" />
+      <Dropdown className="border rounded-md !border-gray-400 bg-white" theme={ThemeColorDropDown.bgWhite} items={['item 1', 'item 2', 'item 3']} label={'Bulk Action'} />
 
     </div>)
   }
@@ -87,7 +88,8 @@ export default function Home() {
             </div>
           </InfoCard>
         </div>
-        <InfoCard title="Recent Orders" className="mt-4 flex-grow py-5" rightSide={renderMenuRecentOrders()}>
+
+        <InfoCard title="Recent Orders" className="mt-4 flex-grow p-5" rightSide={renderMenuRecentOrders()}>
           {Orders.length <= 0 ?
             <div className="flex flex-col justify-center flex-wrap flex-1">
               <div className="w-40 h-40 rounded-full border-2 border-gray-300 bg-gray-200 flex justify-center content-center mx-auto">

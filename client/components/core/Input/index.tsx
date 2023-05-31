@@ -1,5 +1,5 @@
 import { useState, InputHTMLAttributes } from "react"
-import { EnvelopeIcon, LockClosedIcon, UserIcon } from '@heroicons/react/20/solid'
+import { EnvelopeIcon, LockClosedIcon, MagnifyingGlassIcon, UserIcon } from '@heroicons/react/20/solid'
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
@@ -26,7 +26,8 @@ export default function Input({ label, value, type = 'text', ...rest }: IInput) 
     const typeIcons = {
       'email': <EnvelopeIcon {...styles} />,
       'name': <UserIcon {...styles} />,
-      'password': <LockClosedIcon {...styles} />
+      'password': <LockClosedIcon {...styles} />,
+      'search': <MagnifyingGlassIcon {...styles} />
     }
     return typeIcons[type] ?? false
   }
@@ -45,22 +46,22 @@ export default function Input({ label, value, type = 'text', ...rest }: IInput) 
     )
   }
   return (
-    <div>
+    <>
       {
         label ? (
           <label>
-            <div className="mb-6">
+            <div>
               {label}
               {getComponent()}
             </div>
           </label>
         )
           : (
-            <div className="mb-6">
+            <div>
               {getComponent()}
             </div>
           )
       }
-    </div>
+    </>
   )
 }
