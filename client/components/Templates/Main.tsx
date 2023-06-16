@@ -1,5 +1,5 @@
 import Header from "../Header";
-import SideBar from "../SideBar/Index";
+import SideBar from "../SideBar";
 
 export default function MainTemplate({ children, title }) {
 
