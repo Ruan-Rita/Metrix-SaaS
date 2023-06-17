@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { CalendarDaysIcon, CalendarIcon, ChartPieIcon, FunnelIcon, PlusIcon, ShareIcon, ShoppingBagIcon, UsersIcon } from "@heroicons/react/20/solid";
 import Dropdown from "../../components/core/Dropdown";
 import Input from "../../components/core/Input";
@@ -14,8 +14,11 @@ export default function Home() {
   const [openPopoverFilter, setOpenPopoverFilter] = useState(false)
   const [openPopoverFilterDate, setOpenPopoverFilterDate] = useState(false)
   const [openModal, setOpenModal] = useState(false)
-  const [openModalOrder, setOpenModalOrder] = useState(true)
+  const [openModalOrder, setOpenModalOrder] = useState(false)
   const Orders = ['item 1', 'item 2']
+
+  const popoverRef = useRef()
+  const popoverDateRef = useRef()
 
   const titles = ['Product name', 'Color', 'Category', 'Price'];
   const rows = [{
@@ -41,21 +44,21 @@ export default function Home() {
         <div className="flex">
           <Input type="search" placeholder="Search" className="border border-gray-300 bg-white" />
         </div>
-        <div className="relative">
+        <div className="relative" ref={popoverRef}>
           <SubmitButton onClick={() => setOpenPopoverFilter(!openPopoverFilter)} className="mx-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900">
             <FunnelIcon className="fill-gray-400" width={20} /> Filter
           </SubmitButton>
-          <PopoverFilter show={openPopoverFilter} />
+          <PopoverFilter setIsActive={setOpenPopoverFilter} show={openPopoverFilter} popoverRef={popoverRef} />
         </div>
-        <div className="relative">
+        <div className="relative" ref={popoverDateRef}>
           <SubmitButton onClick={() => setOpenPopoverFilterDate(!openPopoverFilterDate)} className="mr-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900">
-            <CalendarDaysIcon className="fill-gray-400" width={20} /> Share
+            <CalendarDaysIcon className="fill-gray-400" width={20} /> Filter
           </SubmitButton>
-          <PopoverFilter show={openPopoverFilterDate} />
+          <PopoverFilter popoverRef={popoverDateRef} setIsActive={setOpenPopoverFilterDate} show={openPopoverFilterDate} />
         </div>
         <div className="relative">
           <SubmitButton onClick={() => setOpenModal(!openModal)} className="mr-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900">
-            <ShareIcon className="fill-gray-400" width={20} /> Filter
+            <ShareIcon className="fill-gray-400" width={20} /> Share
           </SubmitButton>
         </div>
         <Dropdown className="border rounded-md !border-gray-400 bg-white" theme={ThemeColorDropDown.bgWhite} items={['item 1', 'item 2', 'item 3']} label={'Bulk Action'} />
@@ -67,7 +70,7 @@ export default function Home() {
       <section className="flex flex-col h-full pb-4">
         <div className="mb-4 flex justify-between w-full">
           <h1 className="text-lg font-bold">Older Summary</h1>
-          <button className="flex justify-between w-fit h-fit bg-blue-500 hover:bg-blue-700 rounded-lg px-2 py-2 content-center text-sm text-white">
+          <button onClick={() => setOpenModalOrder(true)} className="flex justify-between w-fit h-fit bg-blue-500 hover:bg-blue-700 rounded-lg px-2 py-2 content-center text-sm text-white">
             <PlusIcon className="fill-white" width={20} />
             Create a New Order
           </button>
@@ -137,11 +140,11 @@ export default function Home() {
       </ModalBase>
       <ModalBase width='600' header="Create New Order" close={() => setOpenModalOrder(false)} open={openModalOrder}>
         <div className="flex">
-          <div className="flex justify-between">
+          <div className="flex  justify-between">
             <h1>Order Details</h1>
             <div className="flex content-center">
               New Customer
-              <label className="ml-2 relative inline-flex items-center cursor-pointer">
+              <label className="ml-2 h-fit relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" value="" className="sr-only peer" />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>

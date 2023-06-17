@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { findDOMNode } from 'react-dom'
 import { ThemeColorDropDown } from '../../../util/Enums'
 import SimpleHash from '../../../util/SimpleHash'
 interface IDropdown {
@@ -11,12 +12,17 @@ interface IDropdown {
 }
 export default function Dropdown({ items = [], label, onChange, theme, className }: IDropdown) {
     const [selected, setSelected] = useState(-1)
-    const [idDropdown, setIdDropdown] = useState('')
+    const [isActive, setIsActive] = useState(false)
+    const dropdownRef: any = useRef()
 
     useEffect(() => {
-        setIdDropdown(SimpleHash())
-        console.log('Label', label);
-
+        if (dropdownRef) {
+            window.addEventListener('click', function (e) {
+                if (dropdownRef.current && !dropdownRef.current.contains(e.target) && dropdownRef.current !== e.target) {
+                    setIsActive(false)
+                }
+            })
+        }
     }, [])
 
     useEffect(() => {
@@ -45,13 +51,14 @@ export default function Dropdown({ items = [], label, onChange, theme, className
         if (items.length > 0) return items[0]
         return ''
     }
+
     return (
-        <div className={`relative ${className}`}>
-            <button data-dropdown-toggle={idDropdown} className={`${className} w-fit h-full focus:ring-2 focus:outline-none font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ${themeColor[theme ? theme : ThemeColorDropDown.default].button}`} type="button">
+        <div onClick={() => setIsActive(!isActive)} ref={dropdownRef} className={`relative ${className}`}>
+            <button className={`${className} w-fit h-full focus:ring-2 focus:outline-none font-medium rounded-md text-sm px-4 py-1.5 text-center inline-flex items-center ${themeColor[theme ? theme : ThemeColorDropDown.default].button}`} type="button">
                 {renderValue()}
                 <ChevronDownIcon className={`ml-auto w-5 h-5 ${themeColor[theme ? theme : ThemeColorDropDown.default].icon}`} />
             </button>
-            <div id={idDropdown} className="dropdown-container hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 right-0 translate-x-0">
+            <div className={`${isActive ? '' : 'hidden'} absolute top-1 dropdown-container z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 right-0 translate-x-0`}>
                 <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                     {items.map((item, key) => (
                         <li key={key} onClick={() => setSelected(key)}>

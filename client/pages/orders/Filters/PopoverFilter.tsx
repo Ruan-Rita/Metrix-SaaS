@@ -1,14 +1,25 @@
+import { useEffect, useRef } from "react";
 import Dropdown from "../../../components/core/Dropdown";
 import Input from "../../../components/core/Input";
 import SubmitButton from "../../../components/core/Submit";
 import { ThemeColorDropDown } from "../../../util/Enums";
 
-export default function PopoverFilter({ show }) {
+export default function PopoverFilter({ show, setIsActive, popoverRef }) {
+
+    useEffect(() => {
+        if (popoverRef) {
+            window.addEventListener('click', function (e) {
+                if (popoverRef.current && !popoverRef.current.contains(e.target) && popoverRef.current !== e.target) {
+                    setIsActive(false)
+                }
+            })
+        }
+    }, [])
 
     return (
-        <>
+        <div>
             {show ? (
-                <div className="text-left absolute top-10 p-5 right-0 w-[330px] h-min bg-white shadow-2xl z-10 rounded-lg">
+                <div className="text-left absolute top-0 p-5 right-0 w-[330px] h-min bg-white shadow-2xl z-10 rounded-lg">
                     <h1 className="font-bold text-lg">Filter</h1>
                     <div className="mt-2">
                         <h2 className="mb-2">Order Type:</h2>
@@ -46,6 +57,6 @@ export default function PopoverFilter({ show }) {
                     </div>
                 </div>
             ) : null}
-        </>
+        </div>
     )
 }
