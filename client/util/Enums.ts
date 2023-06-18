@@ -22,6 +22,11 @@ export const StatusProductColorsBg = {
 export enum ThemeColorDropDown {
     default = 'default',
     bgWhite = 'bgWhite',
-    bgBlueGray = 'bgBlueGray'
+    bgBlueGray = 'bgBlueGray',
+    bgGray = 'bgGray'
 }
 
+export enum DirectionDropDown {
+    LEFT = 'left',
+    RIGHT = 'right'
+}

@@ -1,16 +1,16 @@
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useEffect, useRef, useState } from 'react'
-import { findDOMNode } from 'react-dom'
-import { ThemeColorDropDown } from '../../../util/Enums'
-import SimpleHash from '../../../util/SimpleHash'
+import { DirectionDropDown, ThemeColorDropDown } from '../../../util/Enums'
 interface IDropdown {
     items: any[],
     label?: string,
     onChange?: Function | undefined,
     className?: string
     theme?: ThemeColorDropDown
+    direction?: DirectionDropDown
 }
-export default function Dropdown({ items = [], label, onChange, theme, className }: IDropdown) {
+
+export default function Dropdown({ direction = DirectionDropDown.LEFT, items = [], label, onChange, theme, className }: IDropdown) {
     const [selected, setSelected] = useState(-1)
     const [isActive, setIsActive] = useState(false)
     const dropdownRef: any = useRef()
@@ -43,6 +43,10 @@ export default function Dropdown({ items = [], label, onChange, theme, className
             button: 'text-blue-600 bg-blue-100 hover:bg-blue-300 focus:ring-blue-400 dark:bg-blue-300 dark:hover:bg-blue-400 dark:focus:bg-blue-400',
             icon: 'fill-blue-600'
         },
+        bgGray: {
+            button: 'border border-gray-100 text-gray-600 bg-gray-50 hover:bg-gray-100 focus:ring-gray-400 dark:bg-gray-200 dark:hover:bg-gray-400 dark:focus:bg-gray-400',
+            icon: 'fill-gray-600'
+        },
     }
 
     function renderValue() {
@@ -58,8 +62,8 @@ export default function Dropdown({ items = [], label, onChange, theme, className
                 {renderValue()}
                 <ChevronDownIcon className={`ml-auto w-5 h-5 ${themeColor[theme ? theme : ThemeColorDropDown.default].icon}`} />
             </button>
-            <div className={`${isActive ? '' : 'hidden'} absolute top-1 dropdown-container z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 right-0 translate-x-0`}>
-                <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
+            <div className={`${isActive ? '' : 'hidden'} ${direction === 'left' ? 'left-0' : 'right-0'} absolute top-10 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 translate-x-0`}>
+                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                     {items.map((item, key) => (
                         <li key={key} onClick={() => setSelected(key)}>
                             <span className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{item}</span>

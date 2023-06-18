@@ -21,7 +21,7 @@ export default function Input({ label, value, type = 'text', ...rest }: IInput) 
 
   function getIcon() {
     const styles = {
-      className: "w-4 absolute ml-2 z-10 text-neutral-700"
+      className: "w-4 absolute ml-2 z-20 text-neutral-700"
     }
     const typeIcons = {
       'email': <EnvelopeIcon {...styles} />,

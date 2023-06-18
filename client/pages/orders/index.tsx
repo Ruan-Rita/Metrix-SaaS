@@ -1,14 +1,16 @@
 import { useState, useRef } from 'react'
 import { CalendarDaysIcon, CalendarIcon, ChartPieIcon, FunnelIcon, PlusIcon, ShareIcon, ShoppingBagIcon, UsersIcon } from "@heroicons/react/20/solid";
-import Dropdown from "../../components/core/Dropdown";
-import Input from "../../components/core/Input";
-import ModalBase from "../../components/core/Modal/Modal";
-import SubmitButton from "../../components/core/Submit";
-import TableBase from "../../components/core/TableBase";
 import InfoCard from "../../components/InfoCard/InfoCard";
 import MainTemplate from "../../components/Templates/Main";
-import { ThemeColorDropDown } from "../../util/Enums";
-import PopoverFilter from './Filters/PopoverFilter';
+import { DirectionDropDown, ThemeColorDropDown } from "../../util/Enums";
+import PopoverFilter from '../../components/Filters/PopoverFilter';
+import Switch from '../../components/Core/Switch';
+import Input from '../../components/Core/Input';
+import SubmitButton from '../../components/Core/Submit';
+import Dropdown from '../../components/Core/Dropdown';
+import TableBase from '../../components/Core/TableBase';
+import ModalBase, { SizeModal } from '../../components/Core/Modal/Modal';
+import ModalCreateOrder from '../../components/Modais/ModalCreateOrder';
 
 export default function Home() {
   const [openPopoverFilter, setOpenPopoverFilter] = useState(false)
@@ -45,23 +47,23 @@ export default function Home() {
           <Input type="search" placeholder="Search" className="border border-gray-300 bg-white" />
         </div>
         <div className="relative" ref={popoverRef}>
-          <SubmitButton onClick={() => setOpenPopoverFilter(!openPopoverFilter)} className="mx-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900">
-            <FunnelIcon className="fill-gray-400" width={20} /> Filter
+          <SubmitButton onClick={() => setOpenPopoverFilter(!openPopoverFilter)} className="mx-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900  hover:!text-white hover:!fill-white hover:!border-white fill-gray-400">
+            <FunnelIcon className="fill-inherit" width={20} /> Filter
           </SubmitButton>
           <PopoverFilter setIsActive={setOpenPopoverFilter} show={openPopoverFilter} popoverRef={popoverRef} />
         </div>
         <div className="relative" ref={popoverDateRef}>
-          <SubmitButton onClick={() => setOpenPopoverFilterDate(!openPopoverFilterDate)} className="mr-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900">
-            <CalendarDaysIcon className="fill-gray-400" width={20} /> Filter
+          <SubmitButton onClick={() => setOpenPopoverFilterDate(!openPopoverFilterDate)} className="mr-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900  hover:!text-white hover:!fill-white hover:!border-white fill-gray-400">
+            <CalendarDaysIcon className="fill-inherit" width={20} /> Filter
           </SubmitButton>
           <PopoverFilter popoverRef={popoverDateRef} setIsActive={setOpenPopoverFilterDate} show={openPopoverFilterDate} />
         </div>
         <div className="relative">
-          <SubmitButton onClick={() => setOpenModal(!openModal)} className="mr-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900">
-            <ShareIcon className="fill-gray-400" width={20} /> Share
+          <SubmitButton onClick={() => setOpenModal(!openModal)} className="mr-2 w-20 flex justify-between border-solid !border-gray-400 bg-white !text-gray-900 hover:!text-white hover:!fill-white hover:!border-white fill-gray-400">
+            <ShareIcon className="fill-inherit" width={20} /> Share
           </SubmitButton>
         </div>
-        <Dropdown className="border rounded-md !border-gray-400 bg-white" theme={ThemeColorDropDown.bgWhite} items={['item 1', 'item 2', 'item 3']} label={'Bulk Action'} />
+        <Dropdown direction={DirectionDropDown.RIGHT} className="border rounded-md !border-gray-400 bg-white" theme={ThemeColorDropDown.bgWhite} items={['item 1', 'item 2', 'item 3']} label={'Bulk Action'} />
       </div>
     )
   }
@@ -138,28 +140,7 @@ export default function Home() {
           won’t do anything. I was taught I could do everything.
         </p>
       </ModalBase>
-      <ModalBase width='600' header="Create New Order" close={() => setOpenModalOrder(false)} open={openModalOrder}>
-        <div className="flex">
-          <div className="flex  justify-between">
-            <h1>Order Details</h1>
-            <div className="flex content-center">
-              New Customer
-              <label className="ml-2 h-fit relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" value="" className="sr-only peer" />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
-              </label>
-            </div>
-          </div>
-          <div>
-            <h1>Items</h1>
-            <Input type="search" placeholder="Search product name" />
-            <div>
-
-            </div>
-          </div>
-        </div>
-      </ModalBase>
+      <ModalCreateOrder hasFooter={false} width={SizeModal.BIG} header="Create New Order" close={() => setOpenModalOrder(false)} open={openModalOrder} />
     </MainTemplate >
   )
 }

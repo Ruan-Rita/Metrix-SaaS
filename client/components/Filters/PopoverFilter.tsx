@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import Dropdown from "../../../components/core/Dropdown";
-import Input from "../../../components/core/Input";
-import SubmitButton from "../../../components/core/Submit";
-import { ThemeColorDropDown } from "../../../util/Enums";
+import { useEffect } from "react";
+import Input from "../Core/Input";
+import Dropdown from "../Core/Dropdown";
+import { ThemeColorDropDown } from "../../util/Enums";
+import SubmitButton from "../Core/Submit";
 
 export default function PopoverFilter({ show, setIsActive, popoverRef }) {
 
@@ -14,7 +14,7 @@ export default function PopoverFilter({ show, setIsActive, popoverRef }) {
                 }
             })
         }
-    }, [])
+    })
 
     return (
         <div>

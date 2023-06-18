@@ -1,11 +1,12 @@
-interface ModalBaseProps {
-    open: boolean
-    children: ReactNode
-    close: () => void
+import { type } from "os"
 
+interface ModalProps {
+    open: boolean
+    close: () => void
+    hasFooter?: boolean
     header?: string
     width?: string
-    height?: string
+    height?: strinf
     onBack?: () => void
     onClose?: () => void
     onClear?: () => void
@@ -13,4 +14,8 @@ interface ModalBaseProps {
     children_header?: ReactNode
 }
 
-export type { ModalBaseProps }
+interface ModalBaseProps extends ModalProps {
+    children: ReactNode
+}
+
+export type { ModalBaseProps, ModalProps }

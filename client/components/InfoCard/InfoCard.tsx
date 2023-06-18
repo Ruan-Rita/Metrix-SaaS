@@ -1,6 +1,6 @@
 import { DOMElement, ReactNode } from "react"
 import { ThemeColorDropDown } from "../../util/Enums"
-import Dropdown from "../core/Dropdown"
+import Dropdown from "../Core/Dropdown"
 
 interface IInfoCard {
     icon?: ReactNode

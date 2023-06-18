@@ -1,13 +1,13 @@
 import { BellAlertIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/20/solid"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import Dropdown from "../core/Dropdown"
+import Dropdown from "../Core/Dropdown"
 
 interface IHeader {
     title: string
 }
 
-export default function Header ({title}: IHeader) {
+export default function Header({ title }: IHeader) {
     const router = useRouter()
     const [historic, setHistoric] = useState([])
     const photoProfile = null
@@ -18,7 +18,7 @@ export default function Header ({title}: IHeader) {
 
         historic.shift()
         setHistoric(historic)
-    },[router.asPath])
+    }, [router.asPath])
 
     return (
         <header className='h-max'>
@@ -30,18 +30,18 @@ export default function Header ({title}: IHeader) {
                     <div>
                         {
                             photoProfile ? (
-                                <img src={photoProfile}/>
+                                <img src={photoProfile} />
                             ) : (
                                 <UserCircleIcon className="w-10 h-10 fill-amber-600" />
                             )
                         }
-                    </div> 
+                    </div>
                 </div>
 
             </div>
             <section className="px-5 py-1 flex items-baseline border-t border-gray-200">
                 <span>
-                    <HomeIcon className="w-4 inline mr-1 fill-blue-500"/>
+                    <HomeIcon className="w-4 inline mr-1 fill-blue-500" />
                 </span>
                 {historic.map((item, key) => (
                     <span key={key} className="text-xs">
